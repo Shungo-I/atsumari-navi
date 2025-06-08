@@ -2,6 +2,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
 
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 
@@ -11,7 +12,19 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   test: {
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'lcov'],
+      reportsDirectory: './coverage',
+      include: ['src/components/**/*.{ts,tsx}'],
+      exclude: [
+        'src/components/**/*.stories.{ts,tsx}',
+        'src/components/**/*.test.{ts,tsx}',
+        'src/test/**',
+      ],
+    },
     workspace: [
+      // Storybook tests
       {
         extends: true,
         plugins: [
@@ -22,12 +35,30 @@ export default defineConfig({
         test: {
           name: 'storybook',
           browser: {
-        enabled: true,
-        headless: true,
-        provider: 'playwright',
-        instances: [{ browser: 'chromium' }]
-      },
+            enabled: true,
+            headless: true,
+            provider: 'playwright',
+            instances: [{ browser: 'chromium' }]
+          },
           setupFiles: ['.storybook/vitest.setup.ts'],
+        },
+      },
+      // Component tests
+      {
+        extends: true,
+        plugins: [react()],
+        test: {
+          name: 'components',
+          environment: 'jsdom',
+          globals: true,
+          setupFiles: ['./src/test/setup.ts'],
+          include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+          exclude: ['src/stories/**', 'node_modules/**', '.next/**'],
+        },
+        resolve: {
+          alias: {
+            '@': path.resolve(dirname, './src'),
+          },
         },
       },
     ],
