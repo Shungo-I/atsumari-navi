@@ -39,4 +39,4 @@ export const NavLink: React.FC<NavLinkProps> = ({
       {children}
     </a>
   );
-}; 
+};
