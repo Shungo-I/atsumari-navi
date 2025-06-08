@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { LinkButton } from './LinkButton';
+import type { Meta, StoryObj } from "@storybook/react";
+import { LinkButton } from "./LinkButton";
 
 const meta: Meta<typeof LinkButton> = {
-  title: 'Components/LinkButton',
+  title: "Components/LinkButton",
   component: LinkButton,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     primary: {
-      control: 'boolean',
+      control: "boolean",
     },
     href: {
-      control: 'text',
+      control: "text",
     },
     target: {
-      control: { type: 'select' },
-      options: ['_self', '_blank'],
+      control: { type: "select" },
+      options: ["_self", "_blank"],
     },
   },
 };
@@ -28,11 +28,11 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     primary: true,
-    children: 'Deploy now',
-    href: '#',
+    children: "Deploy now",
+    href: "#",
     icon: {
-      src: '/vercel.svg',
-      alt: 'Vercel logomark',
+      src: "/vercel.svg",
+      alt: "Vercel logomark",
     },
   },
 };
@@ -40,19 +40,19 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     primary: false,
-    children: 'Read our docs',
-    href: '#',
+    children: "Read our docs",
+    href: "#",
   },
 };
 
 export const WithIcon: Story = {
   args: {
     primary: false,
-    children: 'Go to nextjs.org →',
-    href: '#',
+    children: "Go to nextjs.org →",
+    href: "#",
     icon: {
-      src: '/globe.svg',
-      alt: 'Globe icon',
+      src: "/globe.svg",
+      alt: "Globe icon",
     },
   },
 };
@@ -60,13 +60,13 @@ export const WithIcon: Story = {
 export const ExternalLink: Story = {
   args: {
     primary: true,
-    children: 'External Link',
-    href: 'https://example.com',
-    target: '_blank',
-    rel: 'noopener noreferrer',
+    children: "External Link",
+    href: "https://example.com",
+    target: "_blank",
+    rel: "noopener noreferrer",
     icon: {
-      src: '/next.svg',
-      alt: 'External link icon',
+      src: "/next.svg",
+      alt: "External link icon",
     },
   },
-}; 
+};
