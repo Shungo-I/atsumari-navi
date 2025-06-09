@@ -30,4 +30,4 @@ export interface AppState {
   pins: PinLocation[];
   centerPoint: CenterPoint | null;
   currentUser: User | null;
-} 
+}

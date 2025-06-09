@@ -1,6 +1,6 @@
+import type { CenterPoint, PinLocation } from "@/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import type { PinLocation, CenterPoint } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -18,10 +18,9 @@ function toRadians(degrees: number): number {
 export function calculateDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const dLat = toRadians(lat2 - lat1);
   const dLng = toRadians(lng2 - lng1);
-  const a = 
+  const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
-    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return EARTH_RADIUS_KM * c;
 }
@@ -29,12 +28,12 @@ export function calculateDistance(lat1: number, lng1: number, lat2: number, lng2
 // 複数のピンの中間地点を計算
 export function calculateCenterPoint(pins: PinLocation[]): CenterPoint | null {
   if (pins.length === 0) return null;
-  
+
   if (pins.length === 1) {
     return {
       lat: pins[0].lat,
       lng: pins[0].lng,
-      radius: 0
+      radius: 0,
     };
   }
 
@@ -44,13 +43,13 @@ export function calculateCenterPoint(pins: PinLocation[]): CenterPoint | null {
 
   // 中心点から最も遠いピンまでの距離を計算
   const maxDistance = Math.max(
-    ...pins.map(pin => calculateDistance(centerLat, centerLng, pin.lat, pin.lng))
+    ...pins.map((pin) => calculateDistance(centerLat, centerLng, pin.lat, pin.lng))
   );
 
   return {
     lat: centerLat,
     lng: centerLng,
-    radius: maxDistance
+    radius: maxDistance,
   };
 }
 

@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 interface UserRegistrationProps {
   onRegister: (name: string) => void;
@@ -29,12 +29,8 @@ export function UserRegistration({ onRegister }: UserRegistrationProps) {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-gray-900">
-            あつまりナビ
-          </CardTitle>
-          <CardDescription className="text-gray-600">
-            みんなの集合場所を見つけよう
-          </CardDescription>
+          <CardTitle className="text-2xl font-bold text-gray-900">あつまりナビ</CardTitle>
+          <CardDescription className="text-gray-600">みんなの集合場所を見つけよう</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -52,8 +48,8 @@ export function UserRegistration({ onRegister }: UserRegistrationProps) {
                 className="w-full"
               />
             </div>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700"
               disabled={isSubmitting || !name.trim()}
             >
@@ -64,4 +60,4 @@ export function UserRegistration({ onRegister }: UserRegistrationProps) {
       </Card>
     </div>
   );
-} 
+}
