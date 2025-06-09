@@ -35,10 +35,10 @@ export function PinSidebar({
 
   const handleAddPin = (e: React.FormEvent) => {
     e.preventDefault();
-    const lat = parseFloat(newPin.lat);
-    const lng = parseFloat(newPin.lng);
+    const lat = Number.parseFloat(newPin.lat);
+    const lng = Number.parseFloat(newPin.lng);
     
-    if (isNaN(lat) || isNaN(lng) || !newPin.title.trim()) {
+    if (Number.isNaN(lat) || Number.isNaN(lng) || !newPin.title.trim()) {
       alert("有効な緯度、経度、タイトルを入力してください");
       return;
     }
